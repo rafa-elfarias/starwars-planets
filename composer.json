@@ -1,0 +1,24 @@
+{
+    "name": "API/StarWars",
+    "description": "API contendo dados dos planetas",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Rafael Farias",
+            "email": "rafael.ribeirorj@gmail.com"
+        }
+    ],
+    "require": {
+    	"slim/slim":"3.0",
+        "phpunit/phpunit": "^6.5",
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "require-dev": {
+       
+    },
+    "autoload": {
+        "psr-4": {
+            "StarWars\\": "app"
+        }
+    }
+}
