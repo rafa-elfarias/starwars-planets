@@ -29,6 +29,7 @@ CREATE TABLE `tb_planeta` (
   `nome` varchar(80) DEFAULT NULL,
   `clima` varchar(80) DEFAULT NULL,
   `terreno` varchar(80) DEFAULT NULL,
+  `qtd_filmes` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -39,7 +40,7 @@ CREATE TABLE `tb_planeta` (
 
 LOCK TABLES `tb_planeta` WRITE;
 /*!40000 ALTER TABLE `tb_planeta` DISABLE KEYS */;
-INSERT INTO `tb_planeta` VALUES (1,'Tatooine','arid','desert'),(2,'Yavin IV','temperate, tropical','jungle, rainforests'),(3,'Hoth','frozen','tundra, ice caves, mountain ranges'),(4,'Dagobah','murky','swamp, jungles'),(5,'Naboo','temperate','grassy hills, swamps, forests, mountains'),(6,'Endor','temperate','forests, mountains, lakes');
+INSERT INTO `tb_planeta` VALUES (1,'Tatooine','arid','desert',5),(2,'Yavin IV','temperate, tropical','jungle, rainforests',1),(3,'Hoth','frozen','tundra, ice caves, mountain ranges',1),(4,'Dagobah','murky','swamp, jungles',3),(5,'Naboo','temperate','grassy hills, swamps, forests, mountains',4),(6,'Endor','temperate','forests, mountains, lakes',1);
 /*!40000 ALTER TABLE `tb_planeta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -56,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-14  13:29:32
+-- Dump completed on 2018-12-16 14:20:30

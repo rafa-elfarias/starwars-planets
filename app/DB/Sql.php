@@ -55,6 +55,14 @@ class Sql {
 
 		$stmt->execute();
 
+		// Verifica se a query foi executada com sucesso
+		if($stmt->rowCount() > 0) 
+		{
+			return true;
+		} else {
+			return false;
+		} 
+
 	}
 
 	public function select($rawQuery, $params = array()):array

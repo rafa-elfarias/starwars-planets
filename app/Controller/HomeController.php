@@ -4,6 +4,8 @@ namespace StarWars\Controller;
 
 use Psr\Container\ContainerInterface;
 
+use \StarWars\API;
+
 class HomeController
 {
     protected $container;
@@ -16,7 +18,9 @@ class HomeController
     public function __invoke($req, $resp) {}
 
     public function index($request, $response) {
-      return $response->withJson(['message' => 'Para jogar com planetas de Star Wars, bem-vindo você é.']);
-      //return $response;
+      $api  = new API();
+      $msg = $api->verifyAPI();
+
+      return $response->withJson(['message' => $msg]);
     }
 }

@@ -13,8 +13,10 @@ class Planeta extends Model {
 	*/
 	public function listAll()
 	{
+		// Nova instancia da classe Sql
 		$sql = new Sql();
 
+		// Método select, da classe Sql, 
 		return $sql->select("SELECT * FROM tb_planeta");
 	}
 
@@ -30,13 +32,22 @@ class Planeta extends Model {
 		$sql->query("SET CHARACTER SET utf8");
 
 		$result = $sql->query("INSERT INTO tb_planeta 
-								(nome, clima, terreno) 
+								(nome, clima, 
+								terreno, qtd_filmes) 
 								VALUES (:nome, :clima, 
-								:terreno)", [
+								:terreno,:qtd_filmes)", [
 			':nome'				=> $this->getnome(),
 			':clima'			=> $this->getclima(),
-			':terreno'			=> $this->getterreno()
+			':terreno'			=> $this->getterreno(),
+			':qtd_filmes'		=> $this->getqtd_filmes()
 		]);
+
+		if($result) 
+		{
+			echo json_encode ( array ('success' => true,'msg' => 'Salvo com sucesso o planeta foi.'), JSON_UNESCAPED_UNICODE);
+		} else {
+			echo json_encode ( array ('success' => false,'msg' => 'Não foi possível salvar o planeta.'), JSON_UNESCAPED_UNICODE);
+		}	
 
 	}
 
@@ -77,6 +88,43 @@ class Planeta extends Model {
 	}
 
 	/*
+		Método que atualiza um planeta do banco de dados
+		Chamadono PlanetaController quando o número de filmes salvo está diferente do número mostrado pela API
+	*/
+	public function update() 
+	{
+
+		$sql = new Sql();
+
+		$sql->query("UPDATE tb_planeta
+        				SET qtd_filmes 	= :qtd_filmes
+        				WHERE id = :planeta_id;", [
+				':qtd_filmes'	=> $this->getqtd_filmes(),
+				':planeta_id'	=> $this->getid()
+		]);
+	}
+
+	public function updatedPlanet($planeta) 
+	{
+
+		$sql = new Sql();
+
+		$result = $sql->query("UPDATE tb_planeta
+        				SET qtd_filmes 	= :qtd_filmes
+        				WHERE id = :planeta_id;", [
+				':qtd_filmes'	=> $planeta["qtd_filmes"],
+				':planeta_id'	=> $planeta["id"]
+		]);
+
+		if($result) 
+		{
+			echo json_encode ( array ('success' => true,'msg' => 'Planeta ' .$planeta["nome"]. ' atualizado com sucesso.'), JSON_UNESCAPED_UNICODE);
+		} else {
+			echo json_encode ( array ('success' => false,'msg' => 'Não foi possível atualizar os planetas.'), JSON_UNESCAPED_UNICODE);
+		}
+	}
+
+	/*
 		Método que deleta um planeta do banco de dados
 		Chamado através método delete do PlanetaController
 	*/
@@ -84,10 +132,16 @@ class Planeta extends Model {
 
 		$sql = new Sql();
 
-		$sql->query("DELETE FROM tb_planeta
-        				WHERE id = :planeta_id;", [
-				':planeta_id' => $this->getid()
+		$result = $sql->query("DELETE FROM tb_planeta
+    				WHERE id = :planeta_id;", [
+			':planeta_id' => $this->getid()
 		]);
 
+		if($result) 
+		{
+			echo json_encode ( array ('success' => true,'msg' => 'Deletado com sucesso o planeta foi.'), JSON_UNESCAPED_UNICODE);
+		} else {
+			echo json_encode ( array ('success' => false,'msg' => 'Não foi possível deletar o planeta.'), JSON_UNESCAPED_UNICODE);
+		}	
 	}
 }

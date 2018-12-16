@@ -21,5 +21,8 @@ $app->get("/planeta/nome/{nome}", PlanetaController::class . ':readByName');
 //Rota para adicionar um planeta com nome, clima e terreno
 $app->post('/salvar/{nome}/{clima}/{terreno}', PlanetaController::class . ':create');
 
+//Rota que atualiza a quantidade de filmes que um planeta apareceu
+$app->put('/atualizar-planetas', PlanetaController::class . ':updateAll');
+
 //Rota para deletar um planeta
 $app->delete("/deletar/{id}", PlanetaController::class . ':delete');
